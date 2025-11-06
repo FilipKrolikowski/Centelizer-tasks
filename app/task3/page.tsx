@@ -24,7 +24,7 @@ const Task3 = () => {
 
   return (
     <div className="p-8">
-      <h2 className="title mb-4">User search</h2>
+      <h2 className="title mb-4">User list</h2>
       <div className="flex items-center">
         <input
           type="text"

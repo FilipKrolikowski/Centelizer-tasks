@@ -7,6 +7,7 @@ import { AddUserInputs } from "@/app/types/user";
 import { useForm, SubmitHandler } from "react-hook-form";
 import Image from "next/image";
 import plusImage from "../../images/plus.svg";
+import LoadingSpinner from "@/app/components/LoadingSpinner";
 
 const style = {
   position: "absolute",
@@ -125,13 +126,16 @@ export default function AddUserModal() {
             </div>
           </div>
           {errorMessage && <div className="text-red-600">{errorMessage}</div>}
-          <div className="flex gap-4 mt-6 justify-end">
-            <button className="btn-primary w-28 rounded-4xl! bg-gray-500!" onClick={handleClose}>
-              Cancel
-            </button>
-            <button onClick={handleSubmit(onSubmit)} className="btn-primary w-28 rounded-4xl!">
-              Add
-            </button>
+          <div className="flex justify-between">
+            <div className="mt-4">{addUserMutation.isPending && <LoadingSpinner />}</div>
+            <div className="flex gap-4 mt-6 justify-end">
+              <button className="btn-primary w-28 rounded-4xl! bg-gray-500!" onClick={handleClose}>
+                Cancel
+              </button>
+              <button onClick={handleSubmit(onSubmit)} className="btn-primary w-28 rounded-4xl!">
+                Add
+              </button>
+            </div>
           </div>
         </Box>
       </Modal>

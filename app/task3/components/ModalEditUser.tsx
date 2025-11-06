@@ -5,6 +5,7 @@ import { editUser } from "@/app/api/users";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { User, EditUserInputs } from "@/app/types/user";
 import { useForm, SubmitHandler } from "react-hook-form";
+import LoadingSpinner from "@/app/components/LoadingSpinner";
 
 const style = {
   position: "absolute",
@@ -98,13 +99,16 @@ export default function EditUserModal({ user }: { user: User }) {
             </div>
           </div>
           {errorMessage && <div className="text-red-600">{errorMessage}</div>}
-          <div className="flex gap-4 mt-6 justify-end">
-            <button className="btn-primary w-28 rounded-4xl! bg-gray-500!" onClick={handleClose}>
-              Cancel
-            </button>
-            <button onClick={handleSubmit(onSubmit)} className="btn-primary w-28 rounded-4xl!">
-              Edit
-            </button>
+          <div className="flex justify-between">
+            <div className="mt-4">{editUserMutation.isPending && <LoadingSpinner />}</div>
+            <div className="flex gap-4 mt-6 justify-end">
+              <button className="btn-primary w-28 rounded-4xl! bg-gray-500!" onClick={handleClose}>
+                Cancel
+              </button>
+              <button onClick={handleSubmit(onSubmit)} className="btn-primary w-28 rounded-4xl!">
+                Edit
+              </button>
+            </div>
           </div>
         </Box>
       </Modal>
